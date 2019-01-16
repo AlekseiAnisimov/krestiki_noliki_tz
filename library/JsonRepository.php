@@ -1,5 +1,7 @@
 <?php
 
+// класс реализует хранение и чтение данных в формате json
+
 class JsonRepository implements RepositoryInterface
 {
     const FILE = 'tiktok.json';

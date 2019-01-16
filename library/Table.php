@@ -1,5 +1,6 @@
 <?php
 
+// Класс реализует игровую доску и взаимодействие с ней
 
 class Table extends JsonRepository
 {
@@ -17,6 +18,7 @@ class Table extends JsonRepository
         if ($this->is_winner) return true;
         $this->field = $this->read();
         $type = $stone->type;
+// пользователь передает номер ячейки. по этому номеру указываются индексы в массиве
         switch ($position) {
             case '1':
                 if ($this->field[0][0] == null) {
@@ -72,6 +74,7 @@ class Table extends JsonRepository
             $this->is_winner = true;
             return true;
         }
+// подсчет и ответ , если все ячейки заняты, а победителя нет
         $this->steps++;
         if ($this->steps == 9) {
             $this->showTable();
@@ -80,6 +83,8 @@ class Table extends JsonRepository
         }
         return false;
     }
+
+// рисует таблицу и отображает ее  пользователю
     public function showTable()
     {
         $field = $this->read();
@@ -96,6 +101,7 @@ class Table extends JsonRepository
         }
     }
 
+// получение номера ячейки из индексов массива
     private function getFieldNumber($row, $col)
     {
         $row++;
@@ -119,6 +125,7 @@ class Table extends JsonRepository
         return $number;
     }
 
+// получение индексов массива из числа
     private function getRowCol($field_number)
     {
         $row = 0;
@@ -154,6 +161,8 @@ class Table extends JsonRepository
         return [$row,$col];
     }
 
+// поиск на игровом поле победителя
+// происходит обработка по горизотали, вертикали и по диагоналям 
     private function win($position) 
     {  
         $mass = $this->getRowCol($position);

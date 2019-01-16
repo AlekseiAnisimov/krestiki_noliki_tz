@@ -1,5 +1,7 @@
 <?php
 
+//Класс отвечающий за общение с пользователем
+
 class Interactive
 {
     private $is_active = false;
@@ -9,6 +11,8 @@ class Interactive
     {
         $this->table = $table;
     }
+
+// метод принимает и обрабатывает команды пользователя возвращаю ответ
 
     public function command(string $str,string $stone_type = null)
     {
@@ -44,6 +48,7 @@ class Interactive
         $this->makeStep($str,$stone_type);
     }
 
+// метод обрабатывающий команды на ход камешками
     private function makeStep($str,$stone_type)
     {
         if ($stone_type != null && $this->is_active == true) {
@@ -72,6 +77,7 @@ class Interactive
         }
     }
 
+// ожидает и читает команду пользоателя
     private function communication($message)
     {
         $var = explode(' ',readline($message.PHP_EOL));
